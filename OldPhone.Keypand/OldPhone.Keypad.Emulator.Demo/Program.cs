@@ -97,9 +97,41 @@ namespace OldPhone.Keypad.Emulator.Demo
             }
         }
 
+        /// <summary>
+        /// interactive user input
+        /// </summary>
         static void UserInput()
         {
+            string title = "User input for test";
+            Console.Clear();
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.Title = "Old Phone Emulator Demo";
+            Console.WriteLine("\n  Welcome to the 'Old Phone Emulator' demo.");
+            Console.ResetColor();
 
+            Console.WriteLine($"\n  {title}");
+
+            Console.WriteLine("  Option 1. New input");
+            Console.WriteLine("  Option 2. Main menu");
+            Console.WriteLine("  Option 3. For exit...");
+
+            string? mySelection;
+            mySelection = Console.ReadLine();
+
+            switch (mySelection)
+            {
+                case "1":
+                    Console.Clear();
+                    Execute(title, string.Empty, 1);
+
+                    break;
+                case "2":
+                    Main();
+                    break;
+                case "3":
+                    Exit();
+                    break;
+            }
         }
 
         /// <summary>
