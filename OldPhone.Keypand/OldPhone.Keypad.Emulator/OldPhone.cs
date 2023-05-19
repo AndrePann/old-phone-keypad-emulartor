@@ -198,9 +198,16 @@ namespace OldPhone.Keypad.Emulator
         /// <returns>processed input data object</returns>
         private static InputData ProcessSendKey(InputData inputData)
         {
-            if(inputData.KeyModifier != 0)
+            try
             {
-                ProcessSpaceKey(inputData);
+                if(inputData.KeyModifier != 0)
+                {
+                    ProcessSpaceKey(inputData);
+                }
+            }
+            catch (Exception exp)
+            {
+                throw new InvalidOperationException($"Unexpected exception in {nameof(ProcessSendKey)}: ", exp);
             }
 
             return inputData;
