@@ -155,8 +155,18 @@ namespace OldPhone.Keypad.Emulator
             return inputData;
         }
 
+        /// <summary>
+        /// Process backspace key to remove last key
+        /// </summary>
+        /// <param name="inputData">input data object</param>
+        /// <returns>processed input data object</returns>
         private static InputData ProcessBackspaceKey(InputData inputData)
         {
+            var truncatedOriginInput = inputData.OriginInput.Remove(inputData.OriginInput.Length - 1, 1);
+            inputData.OriginInput    = truncatedOriginInput;
+            inputData.LastKey        = inputData.OriginInput[inputData.OriginInput.Length - 1].ToString();
+            inputData.KeyModifier    -= 1;
+
             return inputData;
         }
 
