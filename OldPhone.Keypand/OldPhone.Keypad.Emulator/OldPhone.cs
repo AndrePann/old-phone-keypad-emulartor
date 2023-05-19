@@ -176,10 +176,17 @@ namespace OldPhone.Keypad.Emulator
         /// <returns>processed input data object</returns>
         private static InputData ProcessBackspaceKey(InputData inputData)
         {
-            var truncatedOriginInput = inputData.OriginInput.Remove(inputData.OriginInput.Length - 1, 1);
-            inputData.OriginInput    = truncatedOriginInput;
-            inputData.LastKey        = inputData.OriginInput[inputData.OriginInput.Length - 1].ToString();
-            inputData.KeyModifier    -= 1;
+            try
+            {
+                var truncatedOriginInput = inputData.OriginInput.Remove(inputData.OriginInput.Length - 1, 1);
+                inputData.OriginInput    = truncatedOriginInput;
+                inputData.LastKey        = inputData.OriginInput[inputData.OriginInput.Length - 1].ToString();
+                inputData.KeyModifier    -= 1;
+            }
+            catch (Exception exp)
+            {
+                throw new InvalidOperationException($"Unexpected exception in {nameof(ProcessBackspaceKey)}: ", exp);
+            }
 
             return inputData;
         }
