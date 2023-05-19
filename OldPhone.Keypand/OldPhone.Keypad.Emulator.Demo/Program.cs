@@ -53,6 +53,59 @@ namespace OldPhone.Keypad.Emulator.Demo
 
         }
 
+        /// <summary>
+        /// Interactive execution
+        /// </summary>
+        /// <param name="title">interactive section</param>
+        /// <param name="sampleInput">input data</param>
+        /// <param name="caller">where do we come from?</param>
+        static void Execute(string title, string sampleInput, int caller)
+        {
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.WriteLine($"\n  {title}");
+            Console.ResetColor();
+
+            string sampleOutput;
+            string? input;
+            Console.ForegroundColor = ConsoleColor.Green;
+            if (!string.IsNullOrEmpty(sampleInput))
+            {
+                input = sampleInput;
+                Console.WriteLine($"\n  Input:  {input}");
+            }
+            else
+            {
+                Console.Write($"\n  Input:  ");
+                input = Console.ReadLine();
+            }
+
+            if (!string.IsNullOrEmpty(input))
+            {
+                sampleOutput = OldPhone.OldPhonePad(input);
+                if (sampleOutput.StartsWith("Error"))
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                }
+                else
+                {
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                }
+                Console.WriteLine($"  Output: {sampleOutput}");
+                Console.ResetColor();
+                Console.WriteLine("\n  Press any key to continue...");
+            }
+
+            Console.ReadLine();
+            if (caller == 0)
+            {
+                SampleInput();
+            }
+            else
+            {
+                UserInput();
+            }
+        }
+
         static void Exit()
         {
 
