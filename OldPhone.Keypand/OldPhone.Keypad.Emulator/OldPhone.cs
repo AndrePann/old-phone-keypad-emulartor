@@ -223,22 +223,29 @@ namespace OldPhone.Keypad.Emulator
         /// <returns>processed input data object</returns>
         private static InputData PrepareOutputData(InputData inputData)
         {
-            inputData.OriginInput += inputData.CurrentKey;
+            try
+            {
+                inputData.OriginInput += inputData.CurrentKey;
 
-            if(inputData.LastKey.Equals(inputData.CurrentKey))
-            {
-                inputData.KeyModifier += 1;
-            }
-            else
-            {
-                if(inputData.LastKey == "-1")
+                if(inputData.LastKey.Equals(inputData.CurrentKey))
                 {
-                    inputData.LastKey = inputData.CurrentKey;
+                    inputData.KeyModifier += 1;
                 }
                 else
                 {
-                    ProcessSpaceKey(inputData);
+                    if(inputData.LastKey == "-1")
+                    {
+                        inputData.LastKey = inputData.CurrentKey;
+                    }
+                    else
+                    {
+                        ProcessSpaceKey(inputData);
+                    }
                 }
+            }
+            catch (Exception exp)
+            {
+                throw new InvalidOperationException($"Unexpected exception in {nameof(PrepareOutputData)}: ", exp);
             }
 
             return inputData;
