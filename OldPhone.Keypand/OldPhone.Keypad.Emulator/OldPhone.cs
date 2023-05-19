@@ -7,7 +7,7 @@ namespace OldPhone.Keypad.Emulator
     /// </summary>
     public static class OldPhone
     {
-        private static Dictionary<string, string> _keyPadDictionary;
+        private static Dictionary<string, string> _keyPadDictionary = new();
 
         /// <summary>
         /// Input processing
