@@ -106,9 +106,20 @@ namespace OldPhone.Keypad.Emulator.Demo
             }
         }
 
+        /// <summary>
+        /// Exit function
+        /// </summary>
         static void Exit()
         {
+            Console.Clear();
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.Title = "Old Phone Emulator Demo";
+            Console.WriteLine("\n  Welcome to the 'Old Phone Emulator' demo.");
+            Console.ResetColor();
 
+            Console.WriteLine("\n  Thank you for using, please press any key for exit.");
+
+            Console.Read();
         }
     }
 }
