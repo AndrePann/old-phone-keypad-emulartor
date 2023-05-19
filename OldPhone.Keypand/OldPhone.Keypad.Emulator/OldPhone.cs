@@ -134,8 +134,24 @@ namespace OldPhone.Keypad.Emulator
             return processedInput;
         }
 
+        /// <summary>
+        /// Process last key if current key is space key
+        /// </summary>
+        /// <param name="inputData">input data object</param>
+        /// <returns>processed input data object</returns>
         private static InputData ProcessSpaceKey(InputData inputData)
         {
+            if(inputData.LastKey != " ")
+            {
+                var keySequenceLength   = _keyPadDictionary[inputData.LastKey].Length;
+                var mod                 = inputData.KeyModifier % keySequenceLength;
+                var keySequencePosition = mod == 0 ? inputData.KeyModifier : mod;
+                var parsedKey           = _keyPadDictionary[inputData.LastKey].Substring(keySequencePosition - 1, 1);
+                inputData.ParsedInput   += parsedKey;
+                inputData.KeyModifier   = 1;
+            }
+            inputData.LastKey = inputData.CurrentKey;
+
             return inputData;
         }
 
