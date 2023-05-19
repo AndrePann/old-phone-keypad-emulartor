@@ -16,17 +16,16 @@ namespace OldPhone.Keypad.Emulator.Demo
             Console.WriteLine("\n  Welcome to the 'Old Phone Emulator' demo.");
             Console.ResetColor();
 
-            Console.WriteLine("\n  A C# library as an emulator for an old phone keypad to translate the input string of" +
-                "digits, \n  spaces, asterisks, or routes into a resulting output for sending over a phone.");
+            Console.WriteLine("\n  A C# library as an emulator for an old phone keypad to translate the input string of digits, \n  spaces, asterisks, or routes into a resulting output for sending over a phone.\n\n");
 
-            Console.WriteLine("  Option 1. Sample input for chose");
+            Console.WriteLine("  Option 1. Sample input for selection");
             Console.WriteLine("  Option 2. User input for test");
             Console.WriteLine("  Option 3. For exit...");
 
-            string? myChose;
-            myChose = Console.ReadLine();
+            string? mySelection;
+            mySelection = Console.ReadLine();
 
-            switch (myChose)
+            switch (mySelection)
             {
                 case "1":
                     SampleInput();

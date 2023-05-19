@@ -7,4 +7,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\OldPhone.Keypad.Emulator\OldPhone.Keypad.Emulator.csproj" />
+  </ItemGroup>
+
 </Project>
