@@ -7,11 +7,49 @@ namespace OldPhone.Keypad.Emulator
     /// </summary>
     public static class OldPhone
     {
-        private static Dictionary<string, string> keyPadDictionary;
+        private static Dictionary<string, string> _keyPadDictionary;
 
+        /// <summary>
+        /// Input processing
+        /// </summary>
+        /// <param name="input">input data</param>
+        /// <returns>parsed input to result output or a user info if the input is invalid or an exception occured</returns>
         public static string OldPhonePad(string input)
         {
-            return input;
+            string output;
+
+            try
+            {
+                InitKeyPadDictionary();
+
+                var regExRule = @"(^([0-9 \* \#  ]+[\#(1,1)])$)";
+
+                var isValid = ValidationInput(input, regExRule, out output);
+
+                if (isValid)
+                {
+                    var inputData = new InputData
+                    {
+                        LastKey = "-1",
+                        KeyModifier = 1
+                    };
+
+                    foreach (char inputKey in input)
+                    {
+                        inputData.CurrentKey = inputKey.ToString();
+
+                        inputData = ProcessInputKey(inputData);
+                    }
+
+                    output = inputData.ParsedInput;
+                }
+            }
+            catch (Exception exp)
+            {
+                output = $"Error: Unexpected exception - {exp.Message}";
+            }
+
+            return output;
         }
 
         /// <summary>
@@ -19,17 +57,17 @@ namespace OldPhone.Keypad.Emulator
         /// </summary>
         private static void InitKeyPadDictionary()
         {
-            keyPadDictionary = new Dictionary<string, string>();
-            keyPadDictionary.Add("0", "0 ");
-            keyPadDictionary.Add("1", "&'()*,-./1");
-            keyPadDictionary.Add("2", "ABC2");
-            keyPadDictionary.Add("3", "DEF3");
-            keyPadDictionary.Add("4", "GHI4");
-            keyPadDictionary.Add("5", "JKL5");
-            keyPadDictionary.Add("6", "MNO6");
-            keyPadDictionary.Add("7", "PQRS7");
-            keyPadDictionary.Add("8", "TUV8");
-            keyPadDictionary.Add("9", "WXYZ9");
+            _keyPadDictionary = new Dictionary<string, string>();
+            _keyPadDictionary.Add("0", "0 ");
+            _keyPadDictionary.Add("1", "&'()*,-./1");
+            _keyPadDictionary.Add("2", "ABC2");
+            _keyPadDictionary.Add("3", "DEF3");
+            _keyPadDictionary.Add("4", "GHI4");
+            _keyPadDictionary.Add("5", "JKL5");
+            _keyPadDictionary.Add("6", "MNO6");
+            _keyPadDictionary.Add("7", "PQRS7");
+            _keyPadDictionary.Add("8", "TUV8");
+            _keyPadDictionary.Add("9", "WXYZ9");
         }
 
         /// <summary>
@@ -65,9 +103,9 @@ namespace OldPhone.Keypad.Emulator
             return isValid;
         }
 
-        private static void ProcessInputKey()
+        private static InputData ProcessInputKey(InputData inputData)
         {
-            
+            return inputData;
         }
 
         private static void ProcessSpaceKey()
