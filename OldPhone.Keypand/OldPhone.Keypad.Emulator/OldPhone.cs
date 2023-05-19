@@ -12,7 +12,7 @@ namespace OldPhone.Keypad.Emulator
         /// <summary>
         /// Input processing
         /// </summary>
-        /// <param name="input">input data</param>
+        /// <param name="input">input string</param>
         /// <returns>parsed input to result output or a user info if the input is invalid or an exception occured</returns>
         public static string OldPhonePad(string input)
         {
@@ -76,7 +76,7 @@ namespace OldPhone.Keypad.Emulator
         /// <summary>
         /// Input validation for valid characters.
         /// </summary>
-        /// <param name="input">input data</param>
+        /// <param name="input">input string</param>
         /// <param name="regExRule">reg expression rule for the validating</param>
         /// <param name="validationResult">the valid input or a user info if the input is invalid or an exception occured</param>
         /// <returns></returns>
@@ -106,29 +106,52 @@ namespace OldPhone.Keypad.Emulator
             return isValid;
         }
 
+        /// <summary>
+        /// Process input data depending on current key
+        /// </summary>
+        /// <param name="inputData">input data object</param>
+        /// <returns>processed input data object</returns>
         private static InputData ProcessInputKey(InputData inputData)
+        {
+            InputData processedInput;
+
+            switch (inputData.CurrentKey)
+            {
+                case " ":
+                    processedInput = ProcessSpaceKey(inputData);
+                    break;
+                case "*":
+                    processedInput = ProcessBackspaceKey(inputData);
+                    break;
+                case "#":
+                    processedInput = ProcessSendKey(inputData);
+                    break;
+                default:
+                    processedInput = PrepareOutputData(inputData);
+                    break;
+            }
+
+            return processedInput;
+        }
+
+        private static InputData ProcessSpaceKey(InputData inputData)
         {
             return inputData;
         }
 
-        private static void ProcessSpaceKey()
+        private static InputData ProcessBackspaceKey(InputData inputData)
         {
-
+            return inputData;
         }
 
-        private static void ProcessBackspaceKey()
+        private static InputData ProcessSendKey(InputData inputData)
         {
-
+            return inputData;
         }
 
-        private static void ProcessSendKey()
+        private static InputData PrepareOutputData(InputData inputData)
         {
-
-        }
-
-        private static void PrepareOutputData()
-        {
-
+            return inputData;
         }
     }
 }
