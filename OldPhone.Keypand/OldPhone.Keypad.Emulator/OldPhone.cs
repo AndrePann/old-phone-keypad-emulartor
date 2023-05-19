@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace OldPhone.Keypad.Emulator
@@ -36,11 +37,35 @@ namespace OldPhone.Keypad.Emulator
             keyPadDictionary.Add("9", "WXYZ9");
         }
 
+        /// <summary>
+        /// Input validation for valid characters.
+        /// </summary>
+        /// <param name="input">input data</param>
+        /// <param name="regExRule">reg expression rule for the validating</param>
+        /// <param name="validationResult">the valid input or a user info if the input is invalid or an exception occured</param>
+        /// <returns></returns>
         private static bool ValidationInput(string input, string regExRule, out string validationResult)
         {
             bool isValid = false;
 
-            validationResult = "";
+            try
+            {
+                var match = Regex.Match(input, regExRule);
+
+                if (match.Success)
+                {
+                    validationResult = input;
+                    isValid = true;
+                }
+                else
+                {
+                    validationResult = $"Error: Please check the input <{input}> for valid characters, digits, spaces, asterisks and routes.\n  Each input must end with a rout! ";
+                }
+            }
+            catch (Exception exp)
+            {
+                validationResult = $"Error: Unexpected exception - {exp.Message}";
+            }                
 
             return isValid;
         }
