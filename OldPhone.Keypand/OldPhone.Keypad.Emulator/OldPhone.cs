@@ -18,9 +18,22 @@ namespace OldPhone.Keypad.Emulator
             return input;
         }
 
+        /// <summary>
+        /// Key pad dictionary to map input key to the result output depending on a key modifier.
+        /// </summary>
         private static void InitKeyPadDictionary()
         {
-
+            keyPadDictionary = new Dictionary<string, string>();
+            keyPadDictionary.Add("0", "0 ");
+            keyPadDictionary.Add("1", "&'()*,-./1");
+            keyPadDictionary.Add("2", "ABC2");
+            keyPadDictionary.Add("3", "DEF3");
+            keyPadDictionary.Add("4", "GHI4");
+            keyPadDictionary.Add("5", "JKL5");
+            keyPadDictionary.Add("6", "MNO6");
+            keyPadDictionary.Add("7", "PQRS7");
+            keyPadDictionary.Add("8", "TUV8");
+            keyPadDictionary.Add("9", "WXYZ9");
         }
 
         private static bool ValidationInput(string input, string regExRule, out string validationResult)
