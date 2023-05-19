@@ -148,16 +148,23 @@ namespace OldPhone.Keypad.Emulator
         /// <returns>processed input data object</returns>
         private static InputData ProcessSpaceKey(InputData inputData)
         {
-            if(inputData.LastKey != " ")
+            try
             {
-                var keySequenceLength   = _keyPadDictionary[inputData.LastKey].Length;
-                var mod                 = inputData.KeyModifier % keySequenceLength;
-                var keySequencePosition = mod == 0 ? inputData.KeyModifier : mod;
-                var parsedKey           = _keyPadDictionary[inputData.LastKey].Substring(keySequencePosition - 1, 1);
-                inputData.ParsedInput   += parsedKey;
-                inputData.KeyModifier   = 1;
+                if(inputData.LastKey != " ")
+                {
+                    var keySequenceLength   = _keyPadDictionary[inputData.LastKey].Length;
+                    var mod                 = inputData.KeyModifier % keySequenceLength;
+                    var keySequencePosition = mod == 0 ? inputData.KeyModifier : mod;
+                    var parsedKey           = _keyPadDictionary[inputData.LastKey].Substring(keySequencePosition - 1, 1);
+                    inputData.ParsedInput   += parsedKey;
+                    inputData.KeyModifier   = 1;
+                }
+                inputData.LastKey = inputData.CurrentKey;
             }
-            inputData.LastKey = inputData.CurrentKey;
+            catch (Exception exp)
+            {
+                throw new InvalidOperationException($"Unexpected exception in {nameof(ProcessSpaceKey)}: ", exp);
+            }
 
             return inputData;
         }
