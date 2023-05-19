@@ -185,8 +185,34 @@ namespace OldPhone.Keypad.Emulator
             return inputData;
         }
 
+        /// <summary>
+        /// Prepare output data
+        /// - init lastKey in first execution
+        /// - memories current key in originInput
+        /// - increment keyModifire if lastKey equalse current key
+        /// </summary>
+        /// <param name="inputData">input data object</param>
+        /// <returns>processed input data object</returns>
         private static InputData PrepareOutputData(InputData inputData)
         {
+            inputData.OriginInput += inputData.CurrentKey;
+
+            if(inputData.LastKey.Equals(inputData.CurrentKey))
+            {
+                inputData.KeyModifier += 1;
+            }
+            else
+            {
+                if(inputData.LastKey == "-1")
+                {
+                    inputData.LastKey = inputData.CurrentKey;
+                }
+                else
+                {
+                    ProcessSpaceKey(inputData);
+                }
+            }
+
             return inputData;
         }
     }
