@@ -42,10 +42,59 @@ namespace OldPhone.Keypad.Emulator.Demo
             }
         }
 
-
+        /// <summary>
+        /// Interactive sample input 
+        /// </summary>
         static void SampleInput()
         {
+            string title = "Sample input for selection";
+            Console.Clear();
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.Title = "Old Phone Emulator Demo";
+            Console.WriteLine("\n  Welcome to the 'Old Phone Emulator' demo.");
+            Console.ResetColor();
 
+            Console.WriteLine($"\n  {title} \n");
+
+            Console.WriteLine("  Option 1. Example input <33#>");
+            Console.WriteLine("  Option 2. Example input <227*#>");
+            Console.WriteLine("  Option 3. Example input <4433555 555666#>");
+            Console.WriteLine("  Option 4. Example input <8 88777444666*664#>");
+            Console.WriteLine("  Option 5. Main menu");
+            Console.WriteLine("  Option 6. For exit...");
+
+            string? mySelection;
+            mySelection = Console.ReadLine();
+
+            switch (mySelection)
+            {
+                case "1":
+                    Console.Clear();
+                    Execute(title, "33#", 0);
+
+                    break;
+                case "2":
+                    Console.Clear();
+                    Execute(title, "227*#", 0);
+
+                    break;
+                case "3":
+                    Console.Clear();
+                    Execute(title, "4433555 555666#", 0);
+
+                    break;
+                case "4":
+                    Console.Clear();
+                    Execute(title, "8 88777444666*664#", 0);
+
+                    break;
+                case "5":
+                    Main();
+                    break;
+                case "6":
+                    Exit();
+                    break;
+            }
         }
 
         static void UserInput()
