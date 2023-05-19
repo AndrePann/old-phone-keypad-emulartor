@@ -113,22 +113,29 @@ namespace OldPhone.Keypad.Emulator
         /// <returns>processed input data object</returns>
         private static InputData ProcessInputKey(InputData inputData)
         {
-            InputData processedInput;
+            InputData processedInput = inputData;
 
-            switch (inputData.CurrentKey)
+            try
             {
-                case " ":
-                    processedInput = ProcessSpaceKey(inputData);
-                    break;
-                case "*":
-                    processedInput = ProcessBackspaceKey(inputData);
-                    break;
-                case "#":
-                    processedInput = ProcessSendKey(inputData);
-                    break;
-                default:
-                    processedInput = PrepareOutputData(inputData);
-                    break;
+                switch (inputData.CurrentKey)
+                {
+                    case " ":
+                        processedInput = ProcessSpaceKey(inputData);
+                        break;
+                    case "*":
+                        processedInput = ProcessBackspaceKey(inputData);
+                        break;
+                    case "#":
+                        processedInput = ProcessSendKey(inputData);
+                        break;
+                    default:
+                        processedInput = PrepareOutputData(inputData);
+                        break;
+                }
+            }
+            catch (Exception exp)
+            {
+                throw new InvalidOperationException($"Unexpected exception in {nameof(ProcessInputKey)}: ", exp);
             }
 
             return processedInput;
