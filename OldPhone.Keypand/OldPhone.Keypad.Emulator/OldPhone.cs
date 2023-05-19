@@ -170,8 +170,18 @@ namespace OldPhone.Keypad.Emulator
             return inputData;
         }
 
+        /// <summary>
+        /// Process send key
+        /// </summary>
+        /// <param name="inputData">input data object</param>
+        /// <returns>processed input data object</returns>
         private static InputData ProcessSendKey(InputData inputData)
         {
+            if(inputData.KeyModifier != 0)
+            {
+                ProcessSpaceKey(inputData);
+            }
+
             return inputData;
         }
 
