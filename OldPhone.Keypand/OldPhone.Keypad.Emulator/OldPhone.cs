@@ -31,7 +31,10 @@ namespace OldPhone.Keypad.Emulator
                     var inputData = new InputData
                     {
                         LastKey = "-1",
-                        KeyModifier = 1
+                        CurrentKey = "",
+                        KeyModifier = 1,
+                        OriginInput = "",
+                        ParsedInput = ""
                     };
 
                     foreach (char inputKey in input)

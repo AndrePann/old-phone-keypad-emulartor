@@ -8,12 +8,12 @@
         /// <summary>
         /// the lase processed input key
         /// </summary>
-        public string LastKey { get; set; }
+        public required string LastKey { get; set; }
 
         /// <summary>
         /// the current processed input key
         /// </summary>
-        public string CurrentKey { get; set; }
+        public required string CurrentKey { get; set; }
 
         /// <summary>
         /// the key modifier to identify the parsed value 
@@ -23,11 +23,11 @@
         /// <summary>
         /// the original processed input data
         /// </summary>
-        public string OriginInput { get; set; }
+        public required string OriginInput { get; set; }
 
         /// <summary>
         /// the parsed process input data
         /// </summary>
-        public string ParsedInput { get; set; }
+        public required string ParsedInput { get; set; }
     }
 }
