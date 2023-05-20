@@ -180,8 +180,22 @@ namespace OldPhone.Keypad.Emulator
             {
                 var truncatedOriginInput = inputData.OriginInput.Remove(inputData.OriginInput.Length - 1, 1);
                 inputData.OriginInput    = truncatedOriginInput;
-                inputData.LastKey        = inputData.OriginInput[inputData.OriginInput.Length - 1].ToString();
-                inputData.KeyModifier    -= 1;
+                if (!string.IsNullOrEmpty(truncatedOriginInput))
+                {
+                    inputData.LastKey        = inputData.OriginInput[inputData.OriginInput.Length - 1].ToString();
+                    inputData.KeyModifier    -= 1;
+                }
+                else
+                {
+                    inputData.LastKey = "-1";
+                    inputData.KeyModifier = 1;
+                }
+
+                if(inputData.ParsedInput.Length > inputData.OriginInput.Length)
+                {
+                    var truncatedParsedInput = inputData.ParsedInput.Remove(inputData.ParsedInput.Length - 1, 1);
+                    inputData.ParsedInput = truncatedParsedInput;
+                }
             }
             catch (Exception exp)
             {
