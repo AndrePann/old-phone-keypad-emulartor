@@ -1,6 +1,6 @@
 ﻿namespace OldPhone.Keypad.Emulator.Test
 {
-    public class Class1
+    public class OldPhoneTest
     {
 
     }
