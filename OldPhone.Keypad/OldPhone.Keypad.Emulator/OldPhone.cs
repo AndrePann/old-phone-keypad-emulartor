@@ -150,7 +150,7 @@ namespace OldPhone.Keypad.Emulator
         {
             try
             {
-                if(inputData.LastKey != " ")
+                if(inputData.LastKey != " " && inputData.LastKey != "-1")
                 {
                     var keySequenceLength   = _keyPadDictionary[inputData.LastKey].Length;
                     var mod                 = inputData.KeyModifier % keySequenceLength;
