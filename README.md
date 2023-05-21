@@ -1,5 +1,7 @@
-# Old Phone keypad emulartor
-A C# library as an emulator for an old phone keypad to translate the input string of digits, spaces, asterisks, or routes into a resulting output for sending over a phone.
+# Old Phone keypad emulator
+A C# library as an emulator for an old phone keypad to translate the input string of digits, spaces, asterisks, and which ends with a route, into a resulting output for sending over a phone.
+
+![Buil and Test](https://github.com/AndrePann/old-phone-keypad-emulator/actions/workflows/dotnet.yml/badge.svg)
 
 ## Introduction
 First of all, I would like to share my thoughts with them and explain why I chose the following implementation. 
@@ -36,6 +38,12 @@ The implementation consists of an OldPhone class, which contains the processing 
 ## Application
 The actual interface is the public method OldPhonePad, which expects a string as an input parameter and returns the resulting output as a string.
 
+The validity of the input string is checked with a regular expression.
+
+~~~
+	var regExRule = @"(^([0-9 \* \#  ]+[\#(1,1)])$)";
+~~~
+
 ## Description
 ### Key Pad Dictionary 
 According to the specifications, a keypad with 12 keys was implemented. The 10 digit keys were mapped in a dictionary, as key-value pairs.
@@ -44,18 +52,22 @@ The key represents the key on the keypad and each character of the Value corresp
 
 This means that if a key is entered several times in series, the KeyModifire is incremented with each input.
 
-| Key            | Value               |
-|----------------|---------------------|
-| 0              | 0 ˽                 |
-| 1              | & ' ( ) * , - . / 1 |
-| 2              | A B C 2             |
-| 3              | D E F 3             |
-| 4              | G H I 4             |
-| 5              | J K L 5             |
-| 6              | M N O 6             |
-| 7              | P Q R S 7           |
-| 8              | T U V 8             |
-| 9              | W X Y Z 9           |
+~~~
+        private static void InitKeyPadDictionary()
+        {
+            _keyPadDictionary = new Dictionary<string, string>();
+            _keyPadDictionary.Add("0", "0 ");
+            _keyPadDictionary.Add("1", "&'()*,-./1");
+            _keyPadDictionary.Add("2", "ABC2");
+            _keyPadDictionary.Add("3", "DEF3");
+            _keyPadDictionary.Add("4", "GHI4");
+            _keyPadDictionary.Add("5", "JKL5");
+            _keyPadDictionary.Add("6", "MNO6");
+            _keyPadDictionary.Add("7", "PQRS7");
+            _keyPadDictionary.Add("8", "TUV8");
+            _keyPadDictionary.Add("9", "WXYZ9");
+        }
+~~~
 
 ### Prepare Output Data
 The KeyModifire value is incremented during processing of the input string if the CurrentKey == the LastKey.
@@ -83,3 +95,5 @@ One or more digits may be followed by a maximum of the same number of asterisks.
 	
 The route is only allowed as a final input. Each input must be terminated with a route.
 
+## License
+MIT
