@@ -49,7 +49,7 @@ namespace OldPhone.Keypad.Emulator
             }
             catch (Exception exp)
             {
-                output = $"Error: Unexpected exception - {exp.Message}";
+                output = $"Error: Unexpected exception in {nameof(OldPhonePad)}: {exp.Message}";
             }
 
             return output;
