@@ -37,6 +37,11 @@ namespace OldPhone.Keypad.Emulator.Demo
                     Exit();
                     break;
                 default:
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    Console.WriteLine("  Enter a value between 1 - 3");
+                    Console.WriteLine("  Press any key to continue...");
+                    Console.ResetColor();
+                    Console.ReadLine();
                     Main();
                     break;
             }
@@ -94,6 +99,14 @@ namespace OldPhone.Keypad.Emulator.Demo
                 case "6":
                     Exit();
                     break;
+                default:
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    Console.WriteLine("  Enter a value between 1 - 6");
+                    Console.WriteLine("  Press any key to continue...");
+                    Console.ResetColor();
+                    Console.ReadLine();
+                    SampleInput();
+                    break;
             }
         }
 
@@ -130,6 +143,14 @@ namespace OldPhone.Keypad.Emulator.Demo
                     break;
                 case "3":
                     Exit();
+                    break;
+                default:
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    Console.WriteLine("  Enter a value between 1 - 3");
+                    Console.WriteLine("  Press any key to continue...");
+                    Console.ResetColor();
+                    Console.ReadLine();
+                    UserInput();
                     break;
             }
         }
