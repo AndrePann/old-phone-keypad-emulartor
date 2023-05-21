@@ -48,6 +48,8 @@ The validity of the input string is checked with a regular expression.
 ### Key Pad Dictionary 
 According to the specifications, a keypad with 12 keys was implemented. The 10 digit keys were mapped in a dictionary, as key-value pairs.
 
+The 2 additional control keys, asterisk for backspace and route for send, are redirected into function calls. 
+
 The key represents the key on the keypad and each character of the Value corresponds to a possible input value. The position of the character within the value string corresponds to the KeyModifire value.
 
 This means that if a key is entered several times in series, the KeyModifire is incremented with each input.
