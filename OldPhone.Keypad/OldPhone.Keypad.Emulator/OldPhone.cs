@@ -100,7 +100,7 @@ namespace OldPhone.Keypad.Emulator
             }
             catch (Exception exp)
             {
-                validationResult = $"Error: Unexpected exception - {exp.Message}";
+                validationResult = $"Error: Unexpected exception in {nameof(ValidationInput)}: {exp.Message}";
             }                
 
             return isValid;
