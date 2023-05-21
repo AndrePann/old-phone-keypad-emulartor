@@ -9,7 +9,7 @@ namespace OldPhone.Keypad.Emulator.Test
 
         [Test]
         [TestCase("2222")]
-        public void Invalid_Input_1(string input)
+        public void Invalid_Input_final_rout_missing(string input)
         {
             // Arange
             string keyInput = input;
@@ -23,7 +23,21 @@ namespace OldPhone.Keypad.Emulator.Test
 
         [Test]
         [TestCase("*22#")]
-        public void Invalid_Input_2(string input)
+        public void Invalid_Input_starts_with_asterisk(string input)
+        {
+            // Arange
+            string keyInput = input;
+
+            // Act
+            string output = OldPhone.OldPhonePad(keyInput);
+
+            // Assert
+            Assert.IsTrue(output.StartsWith("Error"));
+        }
+
+        [Test]
+        [TestCase("22 22*****#")]
+        public void Invalid_Input_digits_followed_too_many_asterisks(string input)
         {
             // Arange
             string keyInput = input;
@@ -37,7 +51,7 @@ namespace OldPhone.Keypad.Emulator.Test
 
         [Test]
         [TestCase("")]
-        public void Invalid_Input_3(string input)
+        public void Invalid_Input_empty(string input)
         {
             // Arange
             string keyInput = input;
@@ -48,7 +62,7 @@ namespace OldPhone.Keypad.Emulator.Test
             // Assert
             Assert.IsTrue(output.StartsWith("Error"));
         }
-
+        
         #endregion // Invalid_Input
 
         #region Key_Backspace
@@ -68,7 +82,7 @@ namespace OldPhone.Keypad.Emulator.Test
         }
 
         [Test]
-        [TestCase("22*#")]
+        [TestCase("22**2#")]
         public void Backspace_Key_22(string input)
         {
             // Arange
@@ -96,6 +110,8 @@ namespace OldPhone.Keypad.Emulator.Test
         }
 
         #endregion // Key_Backspace
+
+        #region Dictionary
 
         #region Key_0
 
@@ -754,5 +770,7 @@ namespace OldPhone.Keypad.Emulator.Test
         }
 
         #endregion // Key_9
+
+        #endregion // Dictionary
     }
 }
