@@ -61,10 +61,10 @@ namespace OldPhone.Keypad.Emulator.Demo
 
             Console.WriteLine($"\n  {title} \n");
 
-            Console.WriteLine("  Option 1. Example input <33#>");
-            Console.WriteLine("  Option 2. Example input <227*#>");
-            Console.WriteLine("  Option 3. Example input <4433555 555666#>");
-            Console.WriteLine("  Option 4. Example input <8 88777444666*664#>");
+            Console.WriteLine("  Option 1. Sample input <33#>");
+            Console.WriteLine("  Option 2. Sample input <227*#>");
+            Console.WriteLine("  Option 3. Sample input <4433555 555666#>");
+            Console.WriteLine("  Option 4. Sample input <8 88777444666*664#>");
             Console.WriteLine("  Option 5. Main menu");
             Console.WriteLine("  Option 6. For exit...");
 
