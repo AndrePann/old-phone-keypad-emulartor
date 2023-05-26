@@ -96,6 +96,20 @@ namespace OldPhone.Keypad.Emulator.Test
         }
 
         [Test]
+        [TestCase("332* 2* 2 * 2   *#")]
+        public void Backspace_Key_33(string input)
+        {
+            // Arange
+            string keyInput = input;
+
+            // Act
+            string output = OldPhone.OldPhonePad(keyInput);
+
+            // Assert
+            Assert.That(output, Is.EqualTo("E"));
+        }
+
+        [Test]
         [TestCase("2222***#")]
         public void Backspace_Key_2(string input)
         {
