@@ -32,7 +32,7 @@ namespace OldPhone.Keypad.Emulator
                     {
                         LastKey = "-1",
                         CurrentKey = "",
-                        KeyModifier = 1,
+                        KeyModifier = 0,
                         OriginInput = "",
                         ParsedInput = ""
                     };
@@ -150,7 +150,7 @@ namespace OldPhone.Keypad.Emulator
         {
             try
             {
-                if(inputData.LastKey != " " && inputData.LastKey != "-1")
+                if(inputData.LastKey != " " && inputData.LastKey != "-1" && inputData.KeyModifier != 0)
                 {
                     var keySequenceLength   = _keyPadDictionary[inputData.LastKey].Length;
                     var mod                 = inputData.KeyModifier % keySequenceLength;
@@ -182,14 +182,26 @@ namespace OldPhone.Keypad.Emulator
                 inputData.OriginInput    = truncatedOriginInput;
                 if (!string.IsNullOrEmpty(truncatedOriginInput))
                 {
-                    inputData.LastKey        = inputData.OriginInput[inputData.OriginInput.Length - 1].ToString();
-                    inputData.KeyModifier    -= 1;
+                    if(inputData.LastKey == " ")
+                    {
+                        var truncatedParsedInput = inputData.ParsedInput.Remove(inputData.ParsedInput.Length - 1, 1);
+                        inputData.ParsedInput = truncatedParsedInput;
+                        inputData.LastKey        = inputData.OriginInput[inputData.OriginInput.Length - 1].ToString();
+                        inputData.KeyModifier    -= 1;
+                        ProcessSpaceKey(inputData);
+                    }
+                    else
+                    {
+                        inputData.LastKey        = inputData.OriginInput[inputData.OriginInput.Length - 1].ToString();
+                        inputData.KeyModifier    -= 1;
+                    }
                 }
                 else
                 {
                     inputData.LastKey = "-1";
-                    inputData.KeyModifier = 1;
+                    inputData.KeyModifier = 0;
                 }
+
 
                 if(inputData.ParsedInput.Length > inputData.OriginInput.Length)
                 {
@@ -247,7 +259,12 @@ namespace OldPhone.Keypad.Emulator
                 }
                 else
                 {
-                    if(inputData.LastKey == "-1")
+                    if (inputData.KeyModifier == 0)
+                    {
+                        inputData.KeyModifier = 1;
+                    }
+
+                    if (inputData.LastKey == "-1")
                     {
                         inputData.LastKey = inputData.CurrentKey;
                     }
